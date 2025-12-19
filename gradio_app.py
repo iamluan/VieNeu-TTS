@@ -17,6 +17,9 @@ import gc
 
 print("⏳ Đang khởi động VieNeu-TTS...")
 
+# For running on Google Colab
+is_on_colab = os.getenv("COLAB_RELEASE_TAG") is not None    
+
 # --- CONSTANTS & CONFIG ---
 CONFIG_PATH = os.path.join(os.path.dirname(__file__), "config.yaml")
 try:
@@ -756,10 +759,6 @@ with gr.Blocks(theme=theme, css=css, title="VieNeu-TTS") as demo:
         )
 
 if __name__ == "__main__":
-
-    is_on_colab = os.getenv("COLAB_RELEASE_TAG") is not None
-    # print(is_on_colab)
-    
     # Cho phép override từ biến môi trường (hữu ích cho Docker)
     server_name = os.getenv("GRADIO_SERVER_NAME", "127.0.0.1")
     server_port = int(os.getenv("GRADIO_SERVER_PORT", "7860"))
