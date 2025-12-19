@@ -756,7 +756,11 @@ with gr.Blocks(theme=theme, css=css, title="VieNeu-TTS") as demo:
         )
 
 if __name__ == "__main__":
+
+    is_on_colab = os.getenv("COLAB_RELEASE_TAG") is not None
+    # print(is_on_colab)
+    
     # Cho phép override từ biến môi trường (hữu ích cho Docker)
     server_name = os.getenv("GRADIO_SERVER_NAME", "127.0.0.1")
     server_port = int(os.getenv("GRADIO_SERVER_PORT", "7860"))
-    demo.queue().launch(server_name=server_name, server_port=server_port)
+    demo.queue().launch(server_name=server_name, server_port=server_port, share=is_on_colab)
